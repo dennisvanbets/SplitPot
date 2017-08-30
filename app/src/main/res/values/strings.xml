@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SplitPot</string>
+    <string name="action_settings">Settings</string>
+    <string name="potDatesExample">21-07-2017 21u30 - 21-07-2017 23u30</string>
+    <string name="participantsLabel">Participants</string>
+    <string name="potNamePlaceholder">Pot1</string>
+    <string name="useravatar">userAvatar</string>
+    <string name="roundCount"><![CDATA[Part of <rc> rounds]]></string>
+    <string name="participant_paid_icon_desc">icon paid</string>
+    <string name="action_users">users</string>
+    <string name="potBalance">5.55</string>
+    <string name="potBalancePlaceHolder">Total debt for current pot: €</string>
+    <string name="participant_name">Participant Name</string>
+</resources>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/participantAvatar"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/useravatar"
+        android:cropToPadding="false"
+        android:elevation="2dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.571"
+        app:srcCompat="@drawable/ic_account_circle"
+        android:tint="@color/colorAccent"
+        />
+
+    <TextView
+        android:id="@+id/participantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/participant_name"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintLeft_toRightOf="@+id/participantAvatar"
+        app:layout_constraintTop_toTopOf="@+id/participantAvatar" />
+
+    <TextView
+        android:id="@+id/potBalancePlaceHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/potBalancePlaceHolder"
+        app:layout_constraintLeft_toRightOf="@+id/participantAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/participantName" />
+
+    <TextView
+        android:id="@+id/potBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/potBalance"
+        android:textColor="@color/colorPrimaryLight"
+        app:layout_constraintLeft_toRightOf="@+id/potBalancePlaceHolder"
+        app:layout_constraintTop_toBottomOf="@+id/participantName" />
+
+    <TextView
+        android:id="@+id/roundCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/roundCount"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/participantAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/potBalancePlaceHolder" />
+
+    <ImageView
+        android:id="@+id/hasPaid"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/participant_paid_icon_desc"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_paid" />
+
+</android.support.constraint.ConstraintLayout>
