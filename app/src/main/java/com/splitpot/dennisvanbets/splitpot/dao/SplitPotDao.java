@@ -1,5 +1,6 @@
 package com.splitpot.dennisvanbets.splitpot.dao;
 
+import com.splitpot.dennisvanbets.splitpot.dao.di.DbModule;
 import com.splitpot.dennisvanbets.splitpot.model.Participant;
 import com.splitpot.dennisvanbets.splitpot.model.Pot;
 import com.splitpot.dennisvanbets.splitpot.model.Round;
@@ -9,10 +10,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.inject.Singleton;
+
+import dagger.Component;
+
 /**
  * Created by DennisVanBets on 23/08/2017.
  */
-
 public interface SplitPotDao {
     void onUpgrade(int i, int j);
 

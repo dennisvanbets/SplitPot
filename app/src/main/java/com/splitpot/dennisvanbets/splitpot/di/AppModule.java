@@ -3,6 +3,7 @@ package com.splitpot.dennisvanbets.splitpot.di;
 import android.app.Application;
 import android.content.Context;
 
+import com.splitpot.dennisvanbets.splitpot.dao.SplitPotDao;
 import com.splitpot.dennisvanbets.splitpot.ui.main.MainActivityComponent;
 
 import javax.inject.Singleton;
