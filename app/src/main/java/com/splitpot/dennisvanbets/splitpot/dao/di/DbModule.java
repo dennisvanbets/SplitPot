@@ -23,7 +23,9 @@ public class DbModule {
     SplitPotDao provideDb(Application application){
         if (db == null){
             db = new SplitPotDaoSQLite(application);
+            Log.v("DbModule", "created db");
         }
+        Log.v("DbModule","provided db");
         return db;
     }
 }

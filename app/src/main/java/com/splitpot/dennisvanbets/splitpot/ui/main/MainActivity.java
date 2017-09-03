@@ -1,9 +1,10 @@
 package com.splitpot.dennisvanbets.splitpot.ui.main;
 
+import android.app.Fragment;
 import android.os.Bundle;
+import android.app.FragmentManager;
+
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 
 import android.support.v7.widget.Toolbar;
@@ -11,24 +12,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.splitpot.dennisvanbets.splitpot.R;
-import com.splitpot.dennisvanbets.splitpot.adapter.PotAdapter;
 import com.splitpot.dennisvanbets.splitpot.dao.SplitPotDao;
-import com.splitpot.dennisvanbets.splitpot.dao.SplitPotDaoSQLite;
-import com.splitpot.dennisvanbets.splitpot.model.Pot;
+import com.splitpot.dennisvanbets.splitpot.ui.pot.PotListFragment;
+import com.splitpot.dennisvanbets.splitpot.ui.user.UserListFragment;
 
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
 
-public class MainActivity extends AppCompatActivity{
-    @Inject SplitPotDao db;
-    private LinearLayoutManager llm;
-    private List<Pot> potList;
+public class MainActivity extends AppCompatActivity implements HasFragmentInjector{
+    @Inject
+    SplitPotDao db;
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
-    private RecyclerView potListRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +38,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
-        initDb();
-        instantiateViews();
-        createPotList();
     }
-
-    private void initDb() {
-        db = new SplitPotDaoSQLite(this.getApplicationContext());
-        potList = db.getAllPots();
-    }
-
-    private void instantiateViews() {
-        potListRecyclerView = (RecyclerView) findViewById(R.id.potlistRecyclerView);
-        llm = new LinearLayoutManager(this);
-        potListRecyclerView.setLayoutManager(llm);
-    }
-
-    private void createPotList() {
-        PotAdapter potAdapter = new PotAdapter(potList, this);
-        potListRecyclerView.setAdapter(potAdapter);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,4 +66,33 @@ public class MainActivity extends AppCompatActivity{
         db.close();
         super.onDestroy();
     }
+
+    @Override
+    public AndroidInjector<android.app.Fragment> fragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
+    }
+/*
+    public static class MyPagerAdapter extends FragmentPagerAdapter {
+        private static int NUM_ITEMS = 2;
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public android.app.Fragment getItem(int position) {
+            switch (position){
+                case 0:
+                    return PotListFragment.newInstance();
+                case 1:
+                    return UserListFragment.newInstance();
+                default: return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+    }
+*/
 }

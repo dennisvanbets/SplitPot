@@ -18,13 +18,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by DennisVanBets on 25/08/2017.
  */
 
 public class PotAdapter extends RecyclerView.Adapter<PotAdapter.PotViewHolder> {
     private List<Pot> pots;
-
     private RecyclerView.LayoutManager layoutManager;
 
     public PotAdapter(List<Pot> pots, Context context) {

@@ -11,4 +11,5 @@
     <string name="potBalance">5.55</string>
     <string name="potBalancePlaceHolder">Total debt for current pot: €</string>
     <string name="participant_name">Participant Name</string>
+    <string name="title_activity_user_list">UserListActivity</string>
 </resources>
