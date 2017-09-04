@@ -9,7 +9,8 @@
     <string name="participant_paid_icon_desc">icon paid</string>
     <string name="action_users">users</string>
     <string name="potBalance">5.55</string>
-    <string name="potBalancePlaceHolder">Total debt for current pot: €</string>
+    <string name="potBalancePlaceHolder">Balance: €</string>
     <string name="participant_name">Participant Name</string>
     <string name="title_activity_user_list">UserListActivity</string>
+    <string name="avaterdesc">avatar</string>
 </resources>

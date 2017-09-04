@@ -102,9 +102,9 @@ public class PotAdapter extends RecyclerView.Adapter<PotAdapter.PotViewHolder> {
                     participantsLayout.setVisibility(View.VISIBLE);
                     showMoreLessParticipants.setVisibility(View.GONE);
                 } else {
-                    participantsLayout.setVisibility(View.GONE);
                     ((ImageView) itemView.findViewById(R.id.participantLabelExpanderView)).setImageResource(R.drawable.ic_show_more);
                     showMoreLessParticipants.setVisibility(View.VISIBLE);
+                    participantsLayout.setVisibility(View.GONE);
                 }
             });
         }

@@ -1,6 +1,7 @@
 package com.splitpot.dennisvanbets.splitpot.dao;
 
-import com.splitpot.dennisvanbets.splitpot.dao.di.DbModule;
+import android.content.Context;
+
 import com.splitpot.dennisvanbets.splitpot.model.Participant;
 import com.splitpot.dennisvanbets.splitpot.model.Pot;
 import com.splitpot.dennisvanbets.splitpot.model.Round;

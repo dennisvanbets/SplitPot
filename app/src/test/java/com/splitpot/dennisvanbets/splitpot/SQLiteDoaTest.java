@@ -32,6 +32,7 @@ import static org.mockito.Mockito.*;
  * Created by DennisVanBets on 23/08/2017.
  */
 
+@Ignore
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class,sdk = 18,packageName = "com.splitpot.dennisvanbets.splitpot")
 public class SQLiteDoaTest {
@@ -39,7 +40,7 @@ public class SQLiteDoaTest {
 
     @Before
     public void init(){
-        this.db = new SplitPotDaoSQLite(RuntimeEnvironment.application);
+        this.db = SplitPotDaoSQLite.getInstance(RuntimeEnvironment.application);
     }
     @After
     public void tearDown() {

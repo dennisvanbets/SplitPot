@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,34 +28,24 @@ import dagger.android.AndroidInjection;
  */
 
 public class UserListFragment extends Fragment {
-    @Inject
-    SplitPotDaoSQLite db;
+    private SplitPotDaoSQLite db;
     private RecyclerView userListRecView;
     private RecyclerView.LayoutManager manager;
     private RecyclerView.Adapter adapter;
 
-    @Override
-    public void onAttach(Context context) {
-        AndroidInjection.inject(this);
-        super.onAttach(context);
-    }
-
-    public static UserListFragment newInstance(){
-        return new UserListFragment();
+    public UserListFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.pot_list_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.user_list_fragment, container, false);
 
         userListRecView = (RecyclerView) rootView.findViewById(R.id.user_list_recycler_view);
-        userListRecView.setHasFixedSize(true);
 
         manager = new LinearLayoutManager(getActivity());
         userListRecView.setLayoutManager(manager);
 
-
+        db = SplitPotDaoSQLite.getInstance(getContext());
         adapter = new UserAdapter(new ArrayList<User>(db.getAllUsers()));
         userListRecView.setAdapter(adapter);
 

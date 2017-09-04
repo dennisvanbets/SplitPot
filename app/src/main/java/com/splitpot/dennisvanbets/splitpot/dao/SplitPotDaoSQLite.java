@@ -21,12 +21,22 @@ import javax.inject.Singleton;
 
 @Singleton
 public class SplitPotDaoSQLite implements SplitPotDao {
-    private final SQLiteDatabase database;
-    private final SplitPotDbHelper dbHelper;
+    private static SplitPotDaoSQLite instance;
 
-    public SplitPotDaoSQLite(Context context) {
+    private SQLiteDatabase database;
+    private SplitPotDbHelper dbHelper;
+
+    private SplitPotDaoSQLite(Context context) {
         this.dbHelper = new SplitPotDbHelper(context);
         this.database = dbHelper.getWritableDatabase();
+    }
+
+
+    public static synchronized SplitPotDaoSQLite getInstance(Context context) {
+        if (instance == null){
+            instance = new SplitPotDaoSQLite(context);
+        };
+        return instance;
     }
 
     @Override

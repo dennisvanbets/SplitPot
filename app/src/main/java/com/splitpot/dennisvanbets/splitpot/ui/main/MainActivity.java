@@ -1,21 +1,39 @@
 package com.splitpot.dennisvanbets.splitpot.ui.main;
 
+import android.annotation.SuppressLint;
+
+import android.support.design.widget.TabLayout;
+import android.support.v7.app.ActionBar;
 import android.app.Fragment;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 
+
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTabHost;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TabHost;
 
 import com.splitpot.dennisvanbets.splitpot.R;
 import com.splitpot.dennisvanbets.splitpot.dao.SplitPotDao;
+import com.splitpot.dennisvanbets.splitpot.dao.SplitPotDaoSQLite;
 import com.splitpot.dennisvanbets.splitpot.ui.pot.PotListFragment;
 import com.splitpot.dennisvanbets.splitpot.ui.user.UserListFragment;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -24,20 +42,47 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
 
-public class MainActivity extends AppCompatActivity implements HasFragmentInjector{
-    @Inject
-    SplitPotDao db;
-    @Inject
-    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-
+public class MainActivity extends AppCompatActivity {
+    private SplitPotDaoSQLite db;
+    private MainPagerAdapter pagerAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = SplitPotDaoSQLite.getInstance(this);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        //tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_coins).setText("Pots"));
+        //tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_people).setText("Users"));
+        tabLayout.addTab(tabLayout.newTab().setText("Pots"));
+        tabLayout.addTab(tabLayout.newTab().setText("Users"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        pagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        viewPager = findViewById(R.id.mainviewpager);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -61,38 +106,11 @@ public class MainActivity extends AppCompatActivity implements HasFragmentInject
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onDestroy() {
         db.close();
         super.onDestroy();
     }
-
-    @Override
-    public AndroidInjector<android.app.Fragment> fragmentInjector() {
-        return fragmentDispatchingAndroidInjector;
-    }
-/*
-    public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 2;
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public android.app.Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    return PotListFragment.newInstance();
-                case 1:
-                    return UserListFragment.newInstance();
-                default: return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_ITEMS;
-        }
-    }
-*/
 }
+
